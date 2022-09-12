@@ -4,9 +4,10 @@ import java.util.Scanner;
 public class Driver {
 
     public static void main(String[] args) {
-        CSVWriter writer= new CSVWriter(file);
-        CSVParser ag= new CSVParser(file_name, mfg, upcCol, catNoCol, descCol, ctnQtyCol, listCol, netCol, specNetCol, umCol, skip);
-        Scanner scan=new Scanner(file_name)
+        Scanner scan=new Scanner("../OriginalCSVFiles/A G MFG 2-15-2022.csv");
+        CSVWriter writer= new CSVWriter("../Documents/FinalPriceSheet.csv");
+        CSVParser ag= new CSVParser(writer, scan, "A&G", upcCol, catNoCol, 3, 4, 5, 6, 64, 7, 5);
+        
         ag.readCSV(scan);
     }
     

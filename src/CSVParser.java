@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class CSVParser {
 
-    public final String file_name;
+    public final Scanner scan;
     public final int skip;
     public final int upcCol;
     public final int catNoCol;
@@ -19,8 +19,7 @@ public class CSVParser {
     public final String mfg;
     public final CSVWriter csvwriter;
 
-    public CSVParser(CSVWriter csvwriter, String file_name, String mfg, int upcCol, int catNoCol, int descCol, int ctnQtyCol, int listCol, int netCol, int specNetCol, int umCol, int skip){
-        this.file_name=file_name;
+    public CSVParser(CSVWriter csvwriter, Scanner scan, String mfg, int upcCol, int catNoCol, int descCol, int ctnQtyCol, int listCol, int netCol, int specNetCol, int umCol, int skip){
         this.mfg=mfg;
         this.upcCol=upcCol;
         this.catNoCol=catNoCol;
@@ -32,10 +31,11 @@ public class CSVParser {
         this.umCol=umCol;
         this.skip=skip;
         this.csvwriter=csvwriter;
+        this.scan=scan;
     }
 
     
-    public void readCSV(Scanner scan) throws IOException{
+    public void readCSV() throws IOException{
         for(int i=0;i<this.skip;i++){
             scan.nextLine();
         }
@@ -43,21 +43,45 @@ public class CSVParser {
             String[] tokens= scan.nextLine().split(",");
             for(int i=0;i<tokens.length;i++){
                 this.csvwriter.writeCol(this.mfg);
-                this.csvwriter.writeCol(tokens[this.upcCol]);
-                this.csvwriter.writeCol(tokens[this.catNoCol]);
-                this.csvwriter.writeCol(tokens[this.descCol]);
-                this.csvwriter.writeCol(tokens[this.ctnQtyCol]);
-                this.csvwriter.writeCol(tokens[this.umCol]);
-                this.csvwriter.writeCol(tokens[this.listCol]);
-                this.csvwriter.writeCol(tokens[specNetCol]);
-                
+                if(this.upcCol==64){
+                    this.csvwriter.writeCol("");
+                }else{
+                    this.csvwriter.writeCol(tokens[this.upcCol]);
+                }
+                if(this.catNoCol==64){
+                    this.csvwriter.writeCol("");
+                }else{
+                    this.csvwriter.writeCol(tokens[this.catNoCol]);
+                }
+                if(this.descCol==64){
+                    this.csvwriter.writeCol("");
+                }else{
+                    this.csvwriter.writeCol(tokens[this.descCol]);
+                }
+                if(this.ctnQtyCol==64){
+                    this.csvwriter.writeCol("");
+                }else{
+                    this.csvwriter.writeCol(tokens[this.ctnQtyCol]);
+                }
+                if(this.umCol==64){
+                    this.csvwriter.writeCol("");
+                }else{
+                    this.csvwriter.writeCol(tokens[this.umCol]);
+                }
+                if(this.listCol==64){
+                    this.csvwriter.writeCol("");
+                }else{
+                    this.csvwriter.writeCol(tokens[this.listCol]);
+                }
+                if(this.specNetCol==64){
+                    this.csvwriter.writeCol("");
+                }else{
+                    this.csvwriter.writeCol(tokens[this.specNetCol]);
+                }
             }
             this.csvwriter.addNewLine();
         }
     }
     
-    public static void main(String[] args) {
-        Scanner scan= new Scanner(file_name);
-        readCSV(scan);
-    }
+    
 }

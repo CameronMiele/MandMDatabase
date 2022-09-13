@@ -41,37 +41,69 @@ public class CSVParser {
         }
         while(scan.hasNext()){
             String[] tokens= scan.nextLine().split(",");
+            if(tokens.length<=3){
+                this.csvwriter.writeCol("");
+                continue;
+            }
             for(int i=0;i<tokens.length;i++){
                 this.csvwriter.writeCol(this.mfg);
                 if(this.upcCol==64){
                     this.csvwriter.writeCol("");
                 }else{
-                    this.csvwriter.writeCol(tokens[this.upcCol]);
+                    if(tokens.length<this.upcCol){
+                        this.csvwriter.writeCol("value");
+                    }else{
+                        this.csvwriter.writeCol(tokens[this.upcCol]);
+                    }
                 }
                 if(this.catNoCol==64){
                     this.csvwriter.writeCol("");
                 }else{
-                    this.csvwriter.writeCol(tokens[this.catNoCol]);
+                    if(tokens.length<=this.catNoCol){
+                        this.csvwriter.writeCol("value");
+                    }else{
+                        this.csvwriter.writeCol(tokens[this.catNoCol]);
+                    }
                 }
                 if(this.descCol==64){
                     this.csvwriter.writeCol("");
                 }else{
-                    this.csvwriter.writeCol(tokens[this.descCol]);
+                    if(tokens.length<=this.descCol){
+                        this.csvwriter.writeCol("value");
+                    }else{
+                        this.csvwriter.writeCol(tokens[this.descCol]);
+                    }
                 }
                 if(this.ctnQtyCol==64){
                     this.csvwriter.writeCol("");
                 }else{
-                    this.csvwriter.writeCol(tokens[this.ctnQtyCol]);
+                    if(tokens.length<=this.ctnQtyCol){
+                        this.csvwriter.writeCol("");
+                    }else{
+                        this.csvwriter.writeCol(tokens[this.ctnQtyCol]);
+                    }
                 }
                 if(this.umCol==64){
                     this.csvwriter.writeCol("");
+                }else if(this.umCol==128){
+                    this.csvwriter.writeCol("c");
+                }else if(this.umCol==256){
+                    this.csvwriter.writeCol("e");
                 }else{
-                    this.csvwriter.writeCol(tokens[this.umCol]);
+                    if(tokens.length<=this.umCol){
+                        this.csvwriter.writeCol("value");
+                    }else{
+                        this.csvwriter.writeCol(tokens[this.umCol]);
+                    }
                 }
                 if(this.listCol==64){
                     this.csvwriter.writeCol("");
                 }else{
-                    this.csvwriter.writeCol(tokens[this.listCol]);
+                    if(tokens.length<=this.listCol){
+                        this.csvwriter.writeCol("value");
+                    }else{
+                        this.csvwriter.writeCol(tokens[this.listCol]);
+                    }
                 }
                 if(this.specNetCol==64){
                     this.csvwriter.writeCol("");

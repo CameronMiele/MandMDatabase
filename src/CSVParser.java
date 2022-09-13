@@ -110,8 +110,9 @@ public class CSVParser {
                 }else{
                     this.csvwriter.writeCol(tokens[this.specNetCol]);
                 }
+                this.csvwriter.addNewLine();
             }
-            this.csvwriter.addNewLine();
+           
         }
     }
     

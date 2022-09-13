@@ -11,14 +11,17 @@ public class CSVWriter {
     public CSVWriter(String file) throws IOException{
         this.file=file;
         this.writer= new FileWriter(this.file);
+        this.writer.flush();
     }
 
     public void writeCol(String value) throws IOException{
         this.writer.write(value+",");
+        this.writer.flush();
     }
 
     public void addNewLine() throws IOException{
         this.writer.write('\n');
+        this.writer.flush();
     }
     
 }

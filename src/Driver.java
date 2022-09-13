@@ -31,7 +31,7 @@ public class Driver {
                                     {"Topaz",2,1,3,7,5,4,64,256,10}};
 
     public static void main(String[] args) throws IOException {
-        CSVWriter writer= new CSVWriter("../Documents/FinalPriceSheet.csv");
+        CSVWriter writer= new CSVWriter("C:\\Users\\cmawe\\M&M Database\\Documents\\FinalPriceSheet.csv");
         File folder= new File("C:\\Users\\cmawe\\M&M Database\\OriginalCSVFiles");
         File[] files= new File[folder.listFiles().length];
         for(int i=0;i<folder.listFiles().length;i++){
@@ -44,5 +44,6 @@ public class Driver {
             parser.readCSV();
             scan.close();
         }      
+        writer.writer.close();
     }   
 }

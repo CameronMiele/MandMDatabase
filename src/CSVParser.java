@@ -1,12 +1,11 @@
 package src;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
-
 
 public class CSVParser {
 
-    public final Scanner scan;
+    public final BufferedReader reader;
     public final int skip;
     public final int upcCol;
     public final int catNoCol;
@@ -19,7 +18,7 @@ public class CSVParser {
     public final String mfg;
     public final CSVWriter csvwriter;
 
-    public CSVParser(CSVWriter csvwriter, Scanner scan, String mfg, int upcCol, int catNoCol, int descCol, int ctnQtyCol, int listCol, int netCol, int specNetCol, int umCol, int skip){
+    public CSVParser(CSVWriter csvwriter, BufferedReader reader, String mfg, int upcCol, int catNoCol, int descCol, int ctnQtyCol, int listCol, int netCol, int specNetCol, int umCol, int skip){
         this.mfg=mfg;
         this.upcCol=upcCol;
         this.catNoCol=catNoCol;
@@ -31,21 +30,21 @@ public class CSVParser {
         this.umCol=umCol;
         this.skip=skip;
         this.csvwriter=csvwriter;
-        this.scan=scan;
+        this.reader=reader;
     }
 
     
     public void readCSV() throws IOException{
         for(int i=0;i<this.skip;i++){
-            scan.nextLine();
+            reader.readLine();
         }
-        while(scan.hasNext()){
-            String nextLine= scan.nextLine();
+        String nextLine=reader.readLine();
+        while(nextLine!=null){
             String[] tokens= nextLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-            if(tokens.length==5 && this.mfg=="Morris"){
+            if(this.mfg=="Morris" && tokens.length==5){
                 System.out.println(nextLine);
-               
             }
+            
             if(tokens.length<=4){
                 continue;
             }
@@ -62,6 +61,7 @@ public class CSVParser {
                 this.csvwriter.addNewLine();
             }
         }
+        nextLine=reader.readLine();
     }
     public void parseUPC(String[] tokens) throws IOException{
         if(this.upcCol==64){

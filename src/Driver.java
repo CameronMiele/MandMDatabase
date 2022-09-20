@@ -1,5 +1,7 @@
 package src;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -39,10 +41,10 @@ public class Driver {
             files[i]=file;
         }
         for(int j=0;j<files.length-1;j++){
-            Scanner scan= new Scanner(files[j]);
-            CSVParser parser= new CSVParser(writer, scan, (String)data[j][0], (int)data[j][1], (int)data[j][2], (int)data[j][3], (int)data[j][4], (int)data[j][5], (int)data[j][6], (int)data[j][7], (int)data[j][8], (int)data[j][9]);
+            BufferedReader reader= new BufferedReader(new FileReader(files[j]));
+            CSVParser parser= new CSVParser(writer, reader, (String)data[j][0], (int)data[j][1], (int)data[j][2], (int)data[j][3], (int)data[j][4], (int)data[j][5], (int)data[j][6], (int)data[j][7], (int)data[j][8], (int)data[j][9]);
             parser.readCSV();
-            scan.close();
+            reader.close();
         }      
         writer.writer.close();
     }   

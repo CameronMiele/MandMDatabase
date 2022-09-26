@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
+
 
 public class MorrisDriver {
     //mfg, upccol, catnocol, desccol, ctnqtycol, listcol,netcol, specnetcol,umcol,skip
@@ -16,10 +16,10 @@ public class MorrisDriver {
         File file=new File("C:\\Users\\cmawe\\M&M Database\\Morris\\Morris 5-13-22.csv");
         
         
-        Scanner scan= new Scanner(new BufferedReader(new FileReader(file)));
-        CSVParser parser= new CSVParser(writer, scan, (String)data2[0], (int)data2[1], (int)data2[2], (int)data2[3], (int)data2[4], (int)data2[5], (int)data2[6], (int)data2[7], (int)data2[8], (int)data2[9]);
+        BufferedReader reader= new BufferedReader(new FileReader(file));
+        CSVParser parser= new CSVParser(writer, reader, (String)data2[0], (int)data2[1], (int)data2[2], (int)data2[3], (int)data2[4], (int)data2[5], (int)data2[6], (int)data2[7], (int)data2[8], (int)data2[9]);
         parser.readCSV();
-        scan.close();
+        
         
 
         writer.writer.close();

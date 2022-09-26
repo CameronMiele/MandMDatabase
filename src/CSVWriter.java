@@ -10,7 +10,7 @@ public class CSVWriter {
 
     public CSVWriter(String file) throws IOException{
         this.file=file;
-        this.writer= new FileWriter(this.file);
+        this.writer= new FileWriter(this.file,true);
         this.writer.flush();
     }
 

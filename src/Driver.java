@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
+
 
 public class Driver {
 
@@ -26,11 +26,11 @@ public class Driver {
                                     {"Klein",1,0,2,3,6,9,64,5,12},
                                     {"Lutron",3,0,2,64,5,6,64,256,1},
                                     {"Mag-Bit",8,0,1,7,2,3,64,256,7},
-                                    {"Morris",1,5,7,13,9,64,64,8,4},
                                     {"PECO",6,1,2,5,3,64,64,128,7},
                                     {"Selecta",1,0,2,64,4,64,64,3,7},
                                     {"Siemens",64,1,64,2,5,6,64,256,6},
                                     {"Topaz",2,1,3,7,5,4,64,256,10}};
+    
 
     public static void main(String[] args) throws IOException {
         CSVWriter writer= new CSVWriter("C:\\Users\\cmawe\\M&M Database\\Documents\\FinalPriceSheet.csv");
@@ -47,5 +47,5 @@ public class Driver {
             reader.close();
         }      
         writer.writer.close();
-    }   
+    }
 }

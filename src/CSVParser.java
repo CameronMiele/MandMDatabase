@@ -36,16 +36,16 @@ public class CSVParser {
 
     
     public void readCSV() throws IOException{
+        
         for(int i=0;i<this.skip;i++){
             scan.nextLine();
         }
         while(scan.hasNext()){
             String nextLine= scan.nextLine();
-            String[] tokens= nextLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-            if(tokens.length==5 && this.mfg=="Morris"){
-                System.out.println(nextLine);
-               
-            }
+            //(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)
+            // -1
+            String[] tokens= nextLine.split(",");    
+            System.out.println(nextLine);         
             if(tokens.length<=4){
                 continue;
             }
@@ -79,14 +79,13 @@ public class CSVParser {
             this.csvwriter.writeCol("");
         }else{
            
-            }try{
-                this.csvwriter.writeCol(tokens[this.catNoCol]);
-            }catch (ArrayIndexOutOfBoundsException e){
-                String fin=tokens[tokens.length-1];
-                System.out.println(fin);
-                for(int i=0;i<fin.length();i++){
-                    System.out.println(fin.charAt(i));
-                }
+            this.csvwriter.writeCol(tokens[this.catNoCol]);
+            //}catch (ArrayIndexOutOfBoundsException e){
+              //  String fin=tokens[tokens.length-1];
+                //System.out.println(fin);
+                //for(int i=0;i<fin.length();i++){
+                  //  System.out.println(fin.charAt(i));
+                //}
             
         }
     }
@@ -120,9 +119,9 @@ public class CSVParser {
         }else if(this.umCol==256){
             this.csvwriter.writeCol("e");
         }else{
-            try{
+            //try{
                 this.csvwriter.writeCol(tokens[this.umCol]);
-            }catch (ArrayIndexOutOfBoundsException e){}
+            //}catch (ArrayIndexOutOfBoundsException e){}
         }
     }
     public void parseListCol(String[] tokens) throws IOException{

@@ -36,16 +36,20 @@ public class CSVParser {
 
     
     public void readCSV() throws IOException{
-        
+        String nextLine=reader.readLine();
         for(int i=0;i<this.skip;i++){
-            reader.readLine();
+            nextLine=reader.readLine();
+
         }
-        while(reader.readLine()!=null){
-            String nextLine= reader.readLine();
+        while(nextLine!=null){
             //(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)
             // -1
-            String[] tokens= nextLine.split(",");    
-            System.out.println(nextLine);         
+            nextLine=reader.readLine();
+            if(nextLine==null){
+                break;
+            }
+            String[] tokens= nextLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)",-1);
+                   
             if(tokens.length<=4){
                 continue;
             }
@@ -71,7 +75,15 @@ public class CSVParser {
             if(tokens.length<=this.upcCol){
                 this.csvwriter.writeCol("");
             }else{
-                this.csvwriter.writeCol(tokens[this.upcCol]);
+                if(this.mfg=="Mag-Bit"){
+                    this.csvwriter.writeMAGUPC(tokens[this.upcCol]);
+                }
+                if(this.mfg=="Klein"){
+                    this.csvwriter.writeKleinUPC(tokens[this.upcCol]);
+                }
+                else{
+                    this.csvwriter.writeCol(tokens[this.upcCol]);
+                }
             }
         }
     }
@@ -79,15 +91,7 @@ public class CSVParser {
         if(this.catNoCol==64){
             this.csvwriter.writeCol("");
         }else{
-           
             this.csvwriter.writeCol(tokens[this.catNoCol]);
-            //}catch (ArrayIndexOutOfBoundsException e){
-              //  String fin=tokens[tokens.length-1];
-                //System.out.println(fin);
-                //for(int i=0;i<fin.length();i++){
-                  //  System.out.println(fin.charAt(i));
-                //}
-            
         }
     }
     public void parseDescCol(String[] tokens) throws IOException{
@@ -108,7 +112,7 @@ public class CSVParser {
             if(tokens.length<=this.ctnQtyCol){
                 this.csvwriter.writeCol("");
             }else{
-                this.csvwriter.writeCol(tokens[this.ctnQtyCol]);
+                this.csvwriter.writeCTN(tokens[this.ctnQtyCol]);
             }
         }
     }

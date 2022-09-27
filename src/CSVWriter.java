@@ -18,6 +18,18 @@ public class CSVWriter {
         this.writer.write(value+",");
         this.writer.flush();
     }
+    public void writeCTN(String value) throws IOException{
+        this.writer.write("\" "+value+"\""+",");
+        this.writer.flush();
+    }
+    public void writeMAGUPC(String value) throws IOException{
+        this.writer.write("722170"+value+",");
+        this.writer.flush();
+    }
+    public void writeKleinUPC(String value) throws IOException{
+        this.writer.write("0-92644"+value+",");
+        this.writer.flush();
+    }
 
     public void addNewLine() throws IOException{
         this.writer.write('\n');
